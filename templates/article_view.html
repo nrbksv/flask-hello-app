@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block page_header %}Статья #{{ article.id }}{% endblock page_header %}
+
+{% block content %}
+    <p><span>Title: </span><span>{{ article.title }}</span></p>
+    <p><span>Content: </span><span>{{ article.content }}</span></p>
+    <p><span>Author: </span><span>{{ article.author }}</span></p>
+{% endblock content %}

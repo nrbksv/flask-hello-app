@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+
+{% block page_header %}Все статьи:{% endblock page_header %}
+
+{% block content %}
+    {% for article in articles%}
+    <p><a href="/articles/{{ article.id }}/">{{ article.author }}: {{article.title}}</a></p>
+    {% endfor %}
+{% endblock content %}
