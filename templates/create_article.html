@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% include 'nav_bar.html' %}
+
+{% block title %}Создать статью{% endblock %}
+{% block page_header %}Создание статьи{% endblock page_header %}
+
+{% block content %}
+    <form method='POST'>
+        <p><input type="text" name="title"></p>
+        <p><textarea name="content" cols="30" rows="10"></textarea></p>
+        <p><input type="text" name="author"></p>
+        <p><input type="submit", value="Создать статью"></p>
+    </form>
+{% endblock content %}
