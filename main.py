@@ -2,7 +2,8 @@ from flask import (
     Flask,  # импортируем класс для инициализации flask-приложения
     render_template,  # импортируем функцию для рендера шаблонов (похожа на шоткат render в Django)
     abort,  # импортируем метод, который будет возвращать указанную ошибку
-    redirect  # импортируем функцию, которая будет делать редирект (похожа на шоткат redirect в Django)
+    redirect,  # импортируем функцию, которая будет делать редирект (похожа на шоткат redirect в Django)
+    request
 )
 
 
@@ -44,5 +45,19 @@ def article_view(article_id):  # параметр article_id попадает в
     return abort(404)  # после того, как все статьи были перебраны и статья с нужны id не нашлась - возвращаем ошибку с 404 статус-кодом
 
 
+@app.route('/articles/create/', methods=['GET', 'POST'])
+def create_article():
+    if request.method == 'GET':
+        return render_template('create_article.html')
+    data = request.form
+    articles.append({
+        'id': len(articles) + 1,
+        'title': data['title'],
+        'content': data['content'],
+        'author': data['author']
+    })
+    return redirect('/articles/')
+
+
 if __name__ == '__main__':
-    app.run()  # запускаем наше Flask-приложение
+    app.run(debug=True)  # запускаем наше Flask-приложение
