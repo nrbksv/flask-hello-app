@@ -5,23 +5,7 @@
 {% block page_header %}Создание статьи{% endblock page_header %}
 
 {% block content %}
-    <form method='POST'>
-        {{ form.csrf_token }}
-        <p>
-            {{ form.title.label }}
-            {{ form.title }}
-            {{ form.title.errors }}
-        </p>
-        <p>
-            {{ form.content.label }}
-            {{ form.content }}
-            {{ form.content.errors }}
-        </p>
-        <p>
-            {{ form.author.label }}
-            {{ form.author }}
-            {{ form.author.errors }}
-        </p>
-        <p><input type="submit", value="Создать статью"></p>
+    <form action="/articles/create/">
+        {% include 'article_from.html' %}
     </form>
 {% endblock content %}
