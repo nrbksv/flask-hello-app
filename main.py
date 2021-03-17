@@ -6,6 +6,8 @@ from flask import (
     request
 )
 
+from forms import ArticleForm
+
 
 articles = [  # Список, в котором хранятся наши статьи
     {'id': 1, 'title': 'Статья 1', 'content': 'Контент статьи 1', 'author': 'Vasya Pupkin'},
@@ -16,6 +18,7 @@ articles = [  # Список, в котором хранятся наши ста
 
 
 app = Flask(__name__)  # Инициализируем Flask-приложение
+app.config['SECRET_KEY'] = 'secret_key'
 
 
 @app.route('/', methods=['GET'])
@@ -47,16 +50,17 @@ def article_view(article_id):  # параметр article_id попадает в
 
 @app.route('/articles/create/', methods=['GET', 'POST'])
 def create_article():
-    if request.method == 'GET':
-        return render_template('create_article.html')
-    data = request.form
-    articles.append({
-        'id': len(articles) + 1,
-        'title': data['title'],
-        'content': data['content'],
-        'author': data['author']
-    })
-    return redirect('/articles/')
+    form = ArticleForm()
+    if form.validate_on_submit():
+        articles.append({
+            'id': len(articles) + 1,
+            'title': form.title.data,
+            'content': form.content.data,
+            'author': form.author.data
+        })
+        return redirect('/articles/')
+    return render_template('create_article.html', form=form)
+
 
 
 if __name__ == '__main__':

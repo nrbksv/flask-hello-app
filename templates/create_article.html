@@ -6,9 +6,22 @@
 
 {% block content %}
     <form method='POST'>
-        <p><input type="text" name="title"></p>
-        <p><textarea name="content" cols="30" rows="10"></textarea></p>
-        <p><input type="text" name="author"></p>
+        {{ form.csrf_token }}
+        <p>
+            {{ form.title.label }}
+            {{ form.title }}
+            {{ form.title.errors }}
+        </p>
+        <p>
+            {{ form.content.label }}
+            {{ form.content }}
+            {{ form.content.errors }}
+        </p>
+        <p>
+            {{ form.author.label }}
+            {{ form.author }}
+            {{ form.author.errors }}
+        </p>
         <p><input type="submit", value="Создать статью"></p>
     </form>
 {% endblock content %}
