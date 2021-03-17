@@ -62,6 +62,5 @@ def create_article():
     return render_template('create_article.html', form=form)
 
 
-
 if __name__ == '__main__':
     app.run(debug=True)  # запускаем наше Flask-приложение
