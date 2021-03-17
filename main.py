@@ -49,7 +49,7 @@ def article_view(article_id):  # параметр article_id попадает в
 
 
 @app.route('/articles/create/', methods=['GET', 'POST'])
-def create_article():
+def article_create():
     form = ArticleForm()
     if form.validate_on_submit():
         articles.append({
