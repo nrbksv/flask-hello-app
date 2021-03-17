@@ -19,6 +19,7 @@ articles = [  # Список, в котором хранятся наши ста
 
 app = Flask(__name__)  # Инициализируем Flask-приложение
 app.config['SECRET_KEY'] = 'secret_key'
+app.config['ENV'] = 'development'
 
 
 @app.route('/', methods=['GET'])
