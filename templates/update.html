@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% include 'nav_bar.html' %}
+
+{% block title %}Редактировать статью{% endblock %}
+{% block page_header %}Редактирование статьи{% endblock page_header %}
+
+{% block content %}
+    <form action="" method="post">
+        {% include 'article_from.html' %}
+    </form>
+{% endblock content %}
