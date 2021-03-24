@@ -86,7 +86,7 @@ def get_article(pk):
     for article in articles:
         if pk == article.get('id'):
             return article
-    return abort(404)
+    return abort(status=404, description=('Файл не найден'))
 
 
 if __name__ == '__main__':
