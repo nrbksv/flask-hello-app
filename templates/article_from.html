@@ -4,7 +4,10 @@
     {% else %}
         <div class="form-group row">
             <label for="{{ field.id }}" class="col-sm-2 col-form-label">{{ field.label }}</label>
-            <div class="col-sm-10">{{ field(calss='form-control') }}</div>
+            <div class="{% if field.errors %} border border-danger {% endif %}">
+                {{ field(calss='form-control') }}
+                {% for error in field.errors %} <p><small class="my-1">{{ error }}</small></p>{% endfor %}
+            </div>
         </div>
     {% endif %}
 {% endfor %}

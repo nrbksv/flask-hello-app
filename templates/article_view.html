@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
-{% include 'nav_bar.html' %}
 
 {% block title %}Статья{{ article.id }}: {{ article.title }}{% endblock %}
 {% block page_header %}Статья #{{ article.id }}{% endblock page_header %}
+
+{% block nav %}
+    <a class="nav-link" aria-current="page" href="/articles/">Все статьи</a>
+    <a class="nav-link" href="/articles/create/">Создать статью</a>
+{% endblock %}
 
 {% block content %}
     <p><span>Title: </span><span>{{ article.title }}</span></p>
     <p><span>Content: </span><span>{{ article.content }}</span></p>
     <p><span>Author: </span><span>{{ article.author }}</span></p>
+    <p><a class="btn btn-primary" href="/articles/{{ article.id }}/update/">Редактировать</a></p>
 {% endblock content %}

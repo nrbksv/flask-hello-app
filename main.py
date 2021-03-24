@@ -43,10 +43,8 @@ def article_view(article_id):  # параметр article_id попадает в
     """
     Представление для отображения одной статьи
     """
-    for article in articles:  # перебираем все статьи
-        if article_id == article['id']:  # если id перебираемой статьи соответствет значению параметра article_id
-            return render_template('article_view.html', article=article)  # отображаем шаблон article_view.htm, передавая в контекст шаблона статью
-    return abort(404)  # после того, как все статьи были перебраны и статья с нужны id не нашлась - возвращаем ошибку с 404 статус-кодом
+    article = get_article(article_id)
+    return render_template('article_view.html', article=article)  # отображаем шаблон article_view.htm, передавая в контекст шаблона статью
 
 
 @app.route('/articles/create/', methods=['GET', 'POST'])
@@ -61,6 +59,34 @@ def article_create():
         })
         return redirect('/articles/')
     return render_template('create_article.html', form=form)
+
+
+@app.route('/articles/<int:article_id>/update/', methods=['GET', 'POST'])
+def article_update(article_id):
+    if request.method == 'GET':
+        article = get_article(article_id)
+        form = ArticleForm(
+            title=article.get('title'),
+            content=article.get('content'),
+            author=article.get('author')
+        )
+        return render_template('update.html', form=form)
+    elif request.method == 'POST':
+        form = ArticleForm()
+        if form.validate_on_submit():
+            article = get_article(article_id)
+            article['title'] = form.title.data
+            article['content'] = form.content.data
+            article['author'] = form.author.data
+            return redirect(f'/articles/{article_id}/')
+        return render_template('update.html', form=form)
+
+
+def get_article(pk):
+    for article in articles:
+        if pk == article.get('id'):
+            return article
+    return abort(status=404, description=('Файл не найден'))
 
 
 if __name__ == '__main__':
