@@ -9,8 +9,18 @@
 {% endblock %}
 
 {% block content %}
-    <p><span>Title: </span><span>{{ article.title }}</span></p>
-    <p><span>Content: </span><span>{{ article.content }}</span></p>
-    <p><span>Author: </span><span>{{ article.author }}</span></p>
-    <p><a class="btn btn-primary" href="/articles/{{ article.id }}/update/">Редактировать</a></p>
+    <div class="card my-3">
+        <div class="card-header bg-secondary">
+            <span class="text-dark font-weight-bold">Автор:</span>
+            <span class="ml-2 font-italic text-white">{{ article.author }}</span>
+        </div>
+        <div class="card-body">
+            <p class="card-text font-italic">{{article.title}}</p>
+            <hr>
+            <p class="card-text font-italic">{{ article.content }}</p>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-secondary btn-sm" href="/articles/{{ article.id }}/update/">Редактировать</a>
+        </div>
+    </div>
 {% endblock content %}
