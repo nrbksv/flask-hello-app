@@ -44,9 +44,7 @@ def article_view(article_id):  # параметр article_id попадает в
     Представление для отображения одной статьи
     """
     article = get_article(article_id)
-    if article:
-        return render_template('article_view.html', article=article)  # отображаем шаблон article_view.htm, передавая в контекст шаблона статью
-    return abort(404)  # после того, как все статьи были перебраны и статья с нужны id не нашлась - возвращаем ошибку с 404 статус-кодом
+    return render_template('article_view.html', article=article)  # отображаем шаблон article_view.htm, передавая в контекст шаблона статью
 
 
 @app.route('/articles/create/', methods=['GET', 'POST'])
@@ -67,22 +65,19 @@ def article_create():
 def article_update(article_id):
     if request.method == 'GET':
         article = get_article(article_id)
-        if article:
-            form = ArticleForm(
-                title=article.get('title'),
-                content=article.get('content'),
-                author=article.get('author')
-            )
-            return render_template('update.html', form=form)
-        return abort(404)
+        form = ArticleForm(
+            title=article.get('title'),
+            content=article.get('content'),
+            author=article.get('author')
+        )
+        return render_template('update.html', form=form)
     elif request.method == 'POST':
         form = ArticleForm()
         if form.validate_on_submit():
             article = get_article(article_id)
-            if article:
-                article['title'] = form.title.data
-                article['content'] = form.content.data
-                article['author'] = form.author.data
+            article['title'] = form.title.data
+            article['content'] = form.content.data
+            article['author'] = form.author.data
             return redirect(f'/articles/{article_id}/')
         return render_template('update.html', form=form)
 
@@ -91,6 +86,7 @@ def get_article(pk):
     for article in articles:
         if pk == article.get('id'):
             return article
+    return abort(404)
 
 
 if __name__ == '__main__':
