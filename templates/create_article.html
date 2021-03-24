@@ -5,7 +5,7 @@
 {% block page_header %}Создание статьи{% endblock page_header %}
 
 {% block content %}
-    <form action="/articles/create/">
+    <form action="/articles/create/" method="post">
         {% include 'article_from.html' %}
     </form>
 {% endblock content %}
