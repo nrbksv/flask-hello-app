@@ -33,8 +33,9 @@ pip install -r requirements.txt
 cp .env/sample .env
 ```
 
-В фале `.env` замините значения переменных окружения на требуемые:
+В фале `.env` замините значения переменных окружения на требуемые.
 
+Переменные коружения:
  - `SECRET_KEY` - [Секретный ключ Flask-приложения](https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY)
  - `FLASK_ENV` - Окружение приложения. Определяет какие параметры будут активированы применены (см. Файл `src/config`). Доступны варианты `production` и `development`
 
@@ -43,7 +44,7 @@ cp .env/sample .env
 
 Для запуска приложения выполните команду 
 ```bash
-./run_seerver.sh
+source run_server.sh
 ```
 
 
