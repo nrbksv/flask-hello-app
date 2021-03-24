@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
-{% include 'nav_bar.html' %}
 
 {% block title %}Создать статью{% endblock %}
 {% block page_header %}Создание статьи{% endblock page_header %}
 
+{% block nav %}
+    <a class="nav-link" aria-current="page" href="/articles/">Все статьи</a>
+{% endblock %}
+
 {% block content %}
-    <form action="/articles/create/" method="post">
+    <form action="/articles/create/">
         {% include 'article_from.html' %}
     </form>
 {% endblock content %}
