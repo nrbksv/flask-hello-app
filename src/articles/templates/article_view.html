@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Статья{{ article.id }}: {{ article.title }}{% endblock %}
+{% block page_header %}Статья #{{ article.id }}{% endblock page_header %}
+
+{% block nav %}
+    <a class="nav-link" aria-current="page" href="/articles/">Все статьи</a>
+    <a class="nav-link" href="/articles/create/">Создать статью</a>
+{% endblock %}
+
+{% block content %}
+    <div class="card my-3">
+        <div class="card-header bg-secondary">
+            <span class="text-dark font-weight-bold">Автор:</span>
+            <span class="ml-2 font-italic text-white">{{ article.author }}</span>
+        </div>
+        <div class="card-body">
+            <p class="card-text font-italic">{{article.title}}</p>
+            <hr>
+            <p class="card-text font-italic">{{ article.content }}</p>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-secondary btn-sm" href="/articles/{{ article.id }}/update/">Редактировать</a>
+            <button class="btn btn-danger btn-sm ml-2" data-bs-toggle="modal" data-bs-target="#modal">Удалить статью</button>
+        </div>
+    </div>
+    {% include 'delete_article.html' %}
+{% endblock content %}

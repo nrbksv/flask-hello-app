@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Все статьи{% endblock %}
+{% block page_header %}{% if articles %}Все статьи:{% else %}Нет статей{% endif %}{% endblock page_header %}
+
+{% block nav %}
+    <a class="nav-link" href="/articles/create/">Создать статью</a>
+{% endblock %}
+
+{% block content %}
+    {% for article in articles%}
+    <div class="card my-3">
+        <a class="text-decoration-none" href="/articles/{{ article.id }}/">
+            <div class="card-header bg-secondary">
+                <span class="text-dark font-weight-bold">Автор:</span>
+                <span class="ml-2 font-italic text-white">{{ article.author }}</span>
+            </div>
+            <div class="card-body">
+                <p class="card-text font-italic text-dark">{{article.title}}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+{% endblock content %}

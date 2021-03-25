@@ -1,0 +1,19 @@
+<div class="modal" id=modal tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p class="font-italic">Вы действительно хотите удалить статью:</p>
+            <hr>
+            <p class="mx-3"><b>{{ article.title }}</b></p>
+        </div>
+        <div class="modal-footer bg-light">
+        <form action="/articles/{{ article.id }}/delete/" method="post">
+            <div class="d-flex flex-row justify-content-end">
+                <div><a class="btn btn-primary btn-sm mr-1" href="/articles/{{ article.id }}/">Отменить</a></div>
+                <div><input type="submit" class="btn btn-danger btn-sm" value="Да"></div>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+</div>
