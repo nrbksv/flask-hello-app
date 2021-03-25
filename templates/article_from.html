@@ -5,7 +5,7 @@
         <div class="form-group row">
             <label for="{{ field.id }}" class="col-sm-2 col-form-label">{{ field.label }}</label>
             <div class="{% if field.errors %} border border-danger {% endif %}">
-                {{ field(calss='form-control') }}
+                {{ field(class='form-control') }}
                 {% for error in field.errors %} <p><small class="my-1">{{ error }}</small></p>{% endfor %}
             </div>
         </div>

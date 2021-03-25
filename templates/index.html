@@ -4,11 +4,13 @@
 {% block page_header %}Все статьи:{% endblock page_header %}
 
 {% block nav %}
-    <a class="nav-link" href="/articles/create/">Создать статью</a>
+    <a class="nav-link" href="{{ url_for('article_create') }}">Создать
+        статью</a>
 {% endblock %}
 
 {% block content %}
     {% for article in articles%}
-    <p><a href="/articles/{{ article.id }}/">{{ article.author }}: {{article.title}}</a></p>
+    <p><a href="{{ url_for('article_view', article_id=article.id) }}">{{ article
+    .author }}: {{article.title}}</a></p>
     {% endfor %}
 {% endblock content %}

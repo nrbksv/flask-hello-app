@@ -3,7 +3,8 @@ from flask import (
     render_template,  # импортируем функцию для рендера шаблонов (похожа на шоткат render в Django)
     abort,  # импортируем метод, который будет возвращать указанную ошибку
     redirect,  # импортируем функцию, которая будет делать редирект (похожа на шоткат redirect в Django)
-    request
+    request,
+    url_for
 )
 
 from forms import ArticleForm
@@ -27,7 +28,7 @@ def index():
     """
     Представление для перенаправления пользователя с uri / на /articles/
     """
-    return redirect('/articles/')
+    return redirect(url_for('article_list'))
 
 
 @app.route('/articles/', methods=['GET'])  # указываем нашему Flask-приложению, что это представление, которое будет обслуживать uri /articles/ и слушает только get-запросы
@@ -57,7 +58,8 @@ def article_create():
             'content': form.content.data,
             'author': form.author.data
         })
-        return redirect('/articles/')
+        return redirect(url_for('article_list'))
+
     return render_template('create_article.html', form=form)
 
 
@@ -78,7 +80,8 @@ def article_update(article_id):
             article['title'] = form.title.data
             article['content'] = form.content.data
             article['author'] = form.author.data
-            return redirect(f'/articles/{article_id}/')
+            return redirect(
+                url_for('article_view', article_id=article_id))
         return render_template('update.html', form=form)
 
 
