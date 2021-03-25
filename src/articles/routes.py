@@ -74,6 +74,20 @@ def article_update(article_id):
     return render_template('update.html', form=article_form)
 
 
+@article_pages.route('/<int:article_id>/delete/', methods=['GET', 'POST'])
+def delete_article(article_id):
+    """
+    Удаление статьи
+    """
+    article = get_article_or_404(article_id)
+
+    if request.method == 'GET':
+        return render_template('delete_article.html', article=article)
+
+    articles.remove(article)
+    return redirect('/articles/')
+
+
 def get_article_or_404(pk):
     for article in articles:
         if pk == article.get('id'):

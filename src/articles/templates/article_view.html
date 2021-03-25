@@ -21,6 +21,8 @@
         </div>
         <div class="card-footer">
             <a class="btn btn-secondary btn-sm" href="/articles/{{ article.id }}/update/">Редактировать</a>
+            <button class="btn btn-danger btn-sm ml-2" data-bs-toggle="modal" data-bs-target="#modal">Удалить статью</button>
         </div>
     </div>
+    {% include 'delete_article.html' %}
 {% endblock content %}
