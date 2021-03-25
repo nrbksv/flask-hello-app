@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}Все статьи{% endblock %}
-{% block page_header %}Все статьи:{% endblock page_header %}
+{% block page_header %}{% if articles %}Все статьи:{% else %}Нет статей{% endif %}{% endblock page_header %}
 
 {% block nav %}
     <a class="nav-link" href="/articles/create/">Создать статью</a>
@@ -9,6 +9,16 @@
 
 {% block content %}
     {% for article in articles%}
-    <p><a href="/articles/{{ article.id }}/">{{ article.author }}: {{article.title}}</a></p>
+    <div class="card my-3">
+        <a class="text-decoration-none" href="/articles/{{ article.id }}/">
+            <div class="card-header bg-secondary">
+                <span class="text-dark font-weight-bold">Автор:</span>
+                <span class="ml-2 font-italic text-white">{{ article.author }}</span>
+            </div>
+            <div class="card-body">
+                <p class="card-text font-italic text-dark">{{article.title}}</p>
+            </div>
+        </a>
+    </div>
     {% endfor %}
 {% endblock content %}
