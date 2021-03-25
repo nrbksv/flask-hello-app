@@ -4,13 +4,16 @@
 {% block page_header %}{% if articles %}Все статьи:{% else %}Нет статей{% endif %}{% endblock page_header %}
 
 {% block nav %}
-    <a class="nav-link" href="/articles/create/">Создать статью</a>
+    <a class="nav-link" href="{{ url_for
+    ('article_pages.article_create')
+            }}">Создать статью</a>
 {% endblock %}
 
 {% block content %}
     {% for article in articles%}
     <div class="card my-3">
-        <a class="text-decoration-none" href="/articles/{{ article.id }}/">
+        <a class="text-decoration-none" href="{{ url_for('article_pages.article_view', article_id=article.id)
+            }}">
             <div class="card-header bg-secondary">
                 <span class="text-dark font-weight-bold">Автор:</span>
                 <span class="ml-2 font-italic text-white">{{ article.author }}</span>

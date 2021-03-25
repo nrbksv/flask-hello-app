@@ -7,9 +7,13 @@
             <p class="mx-3"><b>{{ article.title }}</b></p>
         </div>
         <div class="modal-footer bg-light">
-        <form action="/articles/{{ article.id }}/delete/" method="post">
+        <form action="{{ url_for
+    ('article_pages.delete_article', article_id=article.id)
+            }}" method="post">
             <div class="d-flex flex-row justify-content-end">
-                <div><a class="btn btn-primary btn-sm mr-1" href="/articles/{{ article.id }}/">Отменить</a></div>
+                <div><a class="btn btn-primary btn-sm mr-1" href="{{ url_for
+    ('article_pages.article_view', article_id=article.id)
+            }}">Отменить</a></div>
                 <div><input type="submit" class="btn btn-danger btn-sm" value="Да"></div>
             </div>
         </form>

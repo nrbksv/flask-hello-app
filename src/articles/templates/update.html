@@ -4,7 +4,8 @@
 {% block page_header %}Редактирование статьи{% endblock page_header %}
 
 {% block nav %}
-    <a class="nav-link" aria-current="page" href="{{ url_for('article_list') }}">Все статьи</a>
+    <a class="nav-link" aria-current="page" href="{{ url_for
+    ('article_pages.article_list') }}">Все статьи</a>
 {% endblock %}
 
 {% block content %}
