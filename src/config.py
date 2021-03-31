@@ -18,7 +18,7 @@ class ConfigProduction(Config):
 class ConfigDevelopment(Config):
     ENV = 'development'
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = f'sqlite:///{BASE_DIR}../db.sqlite'
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{BASE_DIR}/../db.sqlite'
 
 
 ENV_CONFIG = {
