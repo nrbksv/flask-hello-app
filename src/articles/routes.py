@@ -4,7 +4,7 @@ from src import app
 # from src.articles import article_pages
 from src.articles.forms import ArticleForm
 
-from flask import Blueprint
+from flask import Blueprint, url_for
 
 
 article_pages = Blueprint('article_pages', __name__, template_folder='templates')
@@ -48,7 +48,7 @@ def article_create():
             'content': form.content.data,
             'author': form.author.data
         })
-        return redirect('/articles/')
+        return redirect(url_for('article_pages.article_list'))
     return render_template('create_article.html', form=form)
 
 
@@ -69,7 +69,7 @@ def article_update(article_id):
         article['title'] = article_form.title.data
         article['content'] = article_form.content.data
         article['author'] = article_form.author.data
-        return redirect(f'/articles/{article_id}/')
+        return redirect(url_for('article_pages.article_view', article_id=article_id))
 
     return render_template('update.html', form=article_form)
 
@@ -85,7 +85,7 @@ def delete_article(article_id):
         return render_template('delete_article.html', article=article)
 
     articles.remove(article)
-    return redirect('/articles/')
+    return redirect(url_for('article_pages.article_list'))
 
 
 def get_article_or_404(pk):
