@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 from src.config import ENV_CONFIG
 
@@ -7,7 +8,7 @@ from src.config import ENV_CONFIG
 FLASK_ENV = os.environ.get('FLASK_ENV', 'production')
 
 app = Flask(__name__)
-
+db = SQLAlchemy(app)
 
 
 from src import routes
