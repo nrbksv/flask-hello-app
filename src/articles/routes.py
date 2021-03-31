@@ -81,6 +81,6 @@ def delete_article(article_id):
     if request.method == 'GET':
         return render_template('delete_article.html', article=article)
 
-    db.session.remove(article)
+    db.session.delete(article)
     db.session.commit()
     return redirect(url_for('article_pages.article_list'))
