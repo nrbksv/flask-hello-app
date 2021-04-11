@@ -4,11 +4,12 @@
 {% block page_header %}Создание статьи{% endblock page_header %}
 
 {% block nav %}
-    <a class="nav-link" aria-current="page" href="/articles/">Все статьи</a>
+    <a class="nav-link" aria-current="page" href="{{ url_for
+    ('article_pages.article_list') }}">Все статьи</a>
 {% endblock %}
 
 {% block content %}
-    <form action="/articles/create/" method="post">
+    <form action="{{ url_for('article_pages.article_create') }}" method="post">
         {% include 'article_from.html' %}
     </form>
 {% endblock content %}
