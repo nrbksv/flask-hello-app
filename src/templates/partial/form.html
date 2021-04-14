@@ -1,3 +1,7 @@
+<div class="{% if form.errors.non_field_errors %} border border-danger {% endif %}">
+    {% for error in form.errors.non_field_errors %} <p><small class="my-1">{{ error }}</small></p>{% endfor %}
+</div>
+
 {% for field in form %}
     {% if field.id == 'csrf_token' %}
         {{ field }}

@@ -10,6 +10,6 @@
 
 {% block content %}
     <form action="{{ url_for('article_pages.article_create') }}" method="post">
-        {% include 'article_from.html' %}
+        {% include 'partial/form.html' %}
     </form>
 {% endblock content %}
