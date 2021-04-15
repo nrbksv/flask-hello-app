@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}Редактировать статью{% endblock %}
-{% block page_header %}Редактирование статьи{% endblock page_header %}
+{% block title %}Вход{% endblock %}
+{% block page_header %}Вход{% endblock page_header %}
 
 {% block nav %}
     <a class="nav-link" aria-current="page" href="{{ url_for
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post">
+    <form action="{{ url_for('auth_pages.login') }}" method="post">
         {% include 'partial/form.html' %}
     </form>
 {% endblock content %}

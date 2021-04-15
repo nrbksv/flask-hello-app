@@ -1,6 +1,7 @@
-from flask import redirect, render_template, abort, request
+from flask import redirect, render_template, request
+from flask_login import login_required, current_user
 
-from src import app, db
+from src import db
 from src.articles.forms import ArticleForm
 from src.articles.models import Article
 
@@ -29,6 +30,7 @@ def article_view(article_id):
 
 
 @article_pages.route('/create/', methods=['GET', 'POST'])
+@login_required
 def article_create():
     """
     Создание статьи
@@ -47,6 +49,7 @@ def article_create():
 
 
 @article_pages.route('/<int:article_id>/update/', methods=['GET', 'POST'])
+@login_required
 def article_update(article_id):
     """
     Редактирование статьи
@@ -72,6 +75,7 @@ def article_update(article_id):
 
 
 @article_pages.route('/<int:article_id>/delete/', methods=['GET', 'POST'])
+@login_required
 def delete_article(article_id):
     """
     Удаление статьи
