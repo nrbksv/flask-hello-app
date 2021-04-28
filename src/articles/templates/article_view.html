@@ -23,6 +23,25 @@
             <p class="card-text font-italic">{{article.title}}</p>
             <hr>
             <p class="card-text font-italic">{{ article.content }}</p>
+            <hr>
+            <h4 class="mt-3">Комментарии:</h4>
+            {% for comment in article.comments %}
+            <div class="card border border-warning mt-2 mx-auto px-3" style="width: 80%;">
+                {{ comment.author }}:
+                <hr>
+                <p>{{ comment.comment }}</p>
+            </div>
+                {% else %}
+                <hr>
+                <h5 class="text-center">Комментариев нет</h5>
+                <hr>
+            {% endfor %}
+            <h4 class="text-center mt-5 mb-2">Добавить комментарий:</h4>
+            <div class="card mx-auto" style="width: 80%;">
+                <form class="ml-3 mt-3" action="{{  url_for ('article_pages.add_comment', article_id=article.id) }}" method="post">
+                   {% include 'partial/form.html' %}
+                </form>
+            </div>
         </div>
         <div class="card-footer">
             <a class="btn btn-secondary btn-sm" href="{{ url_for

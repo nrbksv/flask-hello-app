@@ -2,8 +2,8 @@ from flask import redirect, render_template, request
 from flask_login import login_required, current_user
 
 from src import db
-from src.articles.forms import ArticleForm
-from src.articles.models import Article
+from src.articles.forms import ArticleForm, CommentForm
+from src.articles.models import Article, Comment
 
 from flask import Blueprint, url_for
 
@@ -26,7 +26,8 @@ def article_view(article_id):
     Детальная просмотр статьи
     """
     article = Article.query.get_or_404(article_id)
-    return render_template('article_view.html', article=article)
+    form = CommentForm()
+    return render_template('article_view.html', article=article, form=form)
 
 
 @article_pages.route('/create/', methods=['GET', 'POST'])
@@ -88,3 +89,22 @@ def delete_article(article_id):
     db.session.delete(article)
     db.session.commit()
     return redirect(url_for('article_pages.article_list'))
+
+
+@article_pages.route('/<int:article_id>/comment/add/', methods=['GET', 'POST'])
+def add_comment(article_id):
+    """
+    Добавление комментария к статье
+    """
+    article = Article.query.get_or_404(article_id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(
+            article=article_id,
+            comment=form.comment.data,
+            author=form.author.data
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('article_pages.article_view', article_id=article_id))
+    return render_template('article_view.html', article=article, form=form)
