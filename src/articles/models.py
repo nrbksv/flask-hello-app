@@ -5,7 +5,7 @@ from src import db
 
 class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150))
+    title = db.Column(db.String(150), validators=[])
     content = db.Column(db.Text)
     author = db.Column(db.String(150))
     comments = db.relationship('Comment', backref='comments')

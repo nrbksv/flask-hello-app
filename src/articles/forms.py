@@ -1,14 +1,15 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField
-from wtforms.validators import length, required
+from wtforms_alchemy import ModelForm
+
+from src.articles.models import Article, Comment
 
 
-class ArticleForm(FlaskForm):
-    title = StringField(label='Заголовок', validators=(required(), length(min=5, max=150)))
-    content = TextAreaField(label='Контент', validators=(required(), length(min=20, max=1500)))
-    author = StringField(label='Автор', validators=(required(), length(min=3, max=120)))
+class ArticleForm(ModelForm):
+    class Meta:
+        model = Article
+        fields = ['title', 'content', 'author']
 
 
-class CommentForm(FlaskForm):
-    author = StringField(label='Автор', validators=(required(), length(max=150)))
-    comment = TextAreaField(label='Комментарий', validators=(required(), length(max=2000)))
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['author', 'comment']

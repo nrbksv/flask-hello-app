@@ -27,7 +27,7 @@
             <h4 class="mt-3">Комментарии:</h4>
             {% for comment in comments %}
             <div class="card border border-warning mt-2 mx-auto px-3" style="width: 80%;">
-            <p>Дата и время создания: {{ comment.created_at}}</p>
+            <p>Дата и время создания: {{ comment.created_at.strftime('%Y-%m-%d  %H:%M:%S')}}</p>
                 <p>Автор: {{ comment.author }}</p>
                 <p>Комментарий: {{ comment.comment }}</p>
             </div>

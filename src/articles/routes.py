@@ -1,12 +1,11 @@
 from flask import redirect, render_template, request
-from flask_login import login_required, current_user
+from flask_login import login_required
 
 from src import db
-from src.articles.forms import ArticleForm, CommentForm
-from src.articles.models import Article, Comment
-
 from flask import Blueprint, url_for
 
+from src.articles.models import Article, Comment
+from src.articles.forms import ArticleForm, CommentForm
 
 article_pages = Blueprint('article_pages', __name__, template_folder='templates')
 
@@ -38,11 +37,12 @@ def article_create():
     Создание статьи
     """
     form = ArticleForm()
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate():
+        form = ArticleForm(data=request.form)
         article = Article(
+            author=form.author.data,
             title=form.title.data,
-            content=form.content.data,
-            author=form.author.data
+            content=form.content.data
         )
         db.session.add(article)
         db.session.commit()
@@ -64,7 +64,8 @@ def article_update(article_id):
         author=article.author
     )
 
-    if article_form.validate_on_submit():
+    if request.method == 'POST' and article_form.validate():
+        article_form = ArticleForm(data=request.form)
         article.title = article_form.title.data
         article.content = article_form.content.data
         article.author = article_form.author.data
@@ -99,7 +100,8 @@ def add_comment(article_id):
     """
     article = Article.query.get_or_404(article_id)
     form = CommentForm()
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate():
+        form = CommentForm(data=request.form)
         comment = Comment(
             article=article_id,
             comment=form.comment.data,
