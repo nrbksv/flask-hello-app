@@ -25,9 +25,10 @@ def article_view(article_id):
     """
     Детальная просмотр статьи
     """
-    article = Article.query.get_or_404(article_id)
+    article_ = Article.query.get_or_404(article_id)
+    comments = Comment.query.filter_by(article=article_.id).order_by(Comment.created_at.desc())
     form = CommentForm()
-    return render_template('article_view.html', article=article, form=form)
+    return render_template('article_view.html', article=article_, comments=comments, form=form)
 
 
 @article_pages.route('/create/', methods=['GET', 'POST'])
